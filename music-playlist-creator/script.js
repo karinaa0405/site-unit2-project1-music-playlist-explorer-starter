@@ -49,23 +49,90 @@ var img = document.getElementsByClassName("playlistImg");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-span.addEventListener("click", () => {
-    modal.style.display = "none";
-});
+// span.addEventListener("click", () => {
+//     modal.style.display = "none";
+// });
 
 for (let i = 0; i < img.length; i++) {
+    
     img[i].addEventListener("click", () => {
+        console.log(i);
         modal.style.display = "block";
+        let playlist = data.playlists[i];
+
+        let modalPlaylistImg = document.getElementById("modalImg");
+        modalPlaylistImg.src = playlist.playlist_art;
+
+        let modalTitle = document.getElementById("modalTitle");
+        modalTitle.textContent = playlist.playlist_name;
+
+        let modalCreator = document.getElementById("modalCreatorTitle");
+        modalCreator.textContent = playlist.playlist_creator;
         
-        
+        playlist.songs.forEach(function(song) {
+            console.log(song);
+
+            let songsCard = document.createElement("div");
+            songsCard.className = "song";
+
+            let songImg = document.createElement("img");
+            songImg.className = "songImg";
+            songImg.src = song.cover_art;
+            songsCard.appendChild(songImg);
+
+            let songInfo = document.createElement("div");
+            songInfo.className = "songInfo";
+            songsCard.appendChild(songInfo);
+
+            let songTitle = document.createElement("p");
+            songTitle.className = "songTitle";
+            songTitle.textContent = song.title;
+            songInfo.appendChild(songTitle);
+
+            let songArtist = document.createElement("p");
+            songArtist.className = "songArtist";
+            songArtist.textContent = song.artist;
+            songInfo.appendChild(songArtist);
+
+            let songAlbum = document.createElement("p");
+            songAlbum.className = "songAlbum";
+            songAlbum.textContent = song.album;
+            songInfo.appendChild(songAlbum);
+
+            let songLength = document.createElement("p");
+            songLength.className = "songLength";
+            songLength.textContent = song.duration;
+            songsCard.appendChild(songLength);
+
+            let container = document.querySelector(".modal-content");
+            container.appendChild(songsCard);
             
+        });
+        
+        span.addEventListener("click", () => {
+            modal.style.display = "none";
+
+            let songsCard = document.getElementsByClassName("song");
+            
+            for (let i = 0; i < songsCard.length; i++) {
+                songsCard[i].remove();
+            }
+        });
 
     });
     
-    // span.addEventListener("click", () => {
-    //     modal.style.display = "none";
-    // });
 }
+
+let shuffleBtn = document.getElementById("shuffleBtn")
+shuffleBtn.addEventListener("click", () => {
+    let songList = document.getElementsByClassName("song");
+    let songs = Array.from(songList.children);
+    songs.sort(() => Math.pow);
+    songs.forEach(function(song) {
+        songList.appendChild(song);
+    });
+});
+
 
 let likeButton = document.getElementsByClassName("emoji");
 let numLikes = document.getElementsByClassName("numLikes");
