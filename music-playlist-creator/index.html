@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,63 +10,37 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    
     <header>
         <h1>Music Playlist Explorer</h1>
+        <button id = "playlistPage" onclick = "window.location.href = 'featured.html';">Playlist Page</button>
     </header>
-
-    <main> 
-        <!-- Your main content here -->
-        <div class = "playlist-cards">
-            <!-- <div class = "playlist">
-                <img class = "playlistImg" src="./assets/img/playlist.png">
-                <h4 class = "playlistTitle">Playlist Title</h4>
-                <p class = "playlistCreator">Creator Name</p>
-                <div class = "likes">
-                    <span>❤️</span>
-                    <p>0</p>
+    
+    <main>
+        <div id = "featuredPlaylist">
+            <div id = "playlistInfo">
+                <img id = "image" src="./assets/img/playlist.png">
+                <div id = "playlistName">
+                    <h1 id = "name">Playlist Name</h1>
+                    <p id = "creatorName">Creator Name</p>
                 </div>
-            </div>  -->
-        </div>
+            </div>
+            
+            <div id = "allSongs"> 
+            </div>
 
+
+        </div>
     </main>
 
-    <div class="modal-overlay">
-        
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class = "modal-intro">
-                
-                <img id = "modalImg" src="./assets/img/playlist.png">
-                
-                <div class = "modal-titles">
-                    <h4 id = "modalTitle">Playlist Title</h4>
-                    <p id = "modalCreatorTitle">Creator Name</p>
-                </div>
-
-                <!-- <button id = "shuffleBtn">Shuffle</button> -->
-            
-            </div>
-            <button id = "shuffleBtn">Shuffle</button>
-            <!-- <div class = "song">
-                <img class = "songImg" src="./assets/img/song.png">
-                
-                <div class = "songInfo">
-                    <p class = "songTitle">Song Title</p>
-                    <p class = "songArtist">Artist Name</p>
-                    <p class = "songAlbum">Album Name</p>
-                </div>
-            
-            </div> -->
-        
-        </div>
-     
-    </div>
-
     <footer>
-        <!-- Your footer content here -->
     </footer>
+    
     <script src="data/data.js"></script>
     <script src="script.js"></script>
+
 </body>
+
 </html>

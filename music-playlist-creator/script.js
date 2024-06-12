@@ -1,3 +1,66 @@
+// Home Page
+
+function getRandomPlaylist() {
+    const playlists = data.playlists;
+    const randomIndex = Math.floor(Math.random() * playlists.length);
+    return playlists[randomIndex];
+}
+    
+function displayPlaylist(playlist) {
+    let playlistImage = document.getElementById('image');
+    playlistImage.src = playlist.playlist_art;
+
+    let playlistTitle = document.getElementById('name');
+    playlistTitle.textContent = playlist.playlist_name;
+
+    let playlistCreator = document.getElementById('creatorName');
+    playlistCreator.textContent = playlist.playlist_creator;
+
+    playlist.songs.forEach(function(song) {
+        let songsCard = document.createElement("div");
+        songsCard.className = "songCard";
+
+        let songImg = document.createElement("img");
+        songImg.className = "songImage";
+        songImg.src = song.cover_art;
+        songsCard.appendChild(songImg);
+
+        let songInfo = document.createElement("div");
+        songInfo.className = "songTitles";
+        songsCard.appendChild(songInfo);
+
+        let songTitle = document.createElement("p");
+        songTitle.className = "title";
+        songTitle.textContent = song.title;
+        songInfo.appendChild(songTitle);
+
+        let songArtist = document.createElement("p");
+        songArtist.className = "artist";
+        songArtist.textContent = song.artist;
+        songInfo.appendChild(songArtist);
+
+        let songAlbum = document.createElement("p");
+        songAlbum.className = "album";
+        songAlbum.textContent = song.album;
+        songInfo.appendChild(songAlbum);
+
+        let songLength = document.createElement("p");
+        songLength.className = "length";
+        songLength.textContent = song.duration;
+        songsCard.appendChild(songLength);
+
+        let container = document.querySelector("#allSongs");
+        container.appendChild(songsCard);
+    });
+}
+
+let randomPlaylist = getRandomPlaylist();
+if (document.getElementById("featuredPlaylist")) {
+    displayPlaylist(randomPlaylist);
+}
+    
+// Playlist Page
+
 data.playlists.forEach(function(playlist) {
     console.log(playlist.playlist_name);
     
@@ -40,18 +103,11 @@ data.playlists.forEach(function(playlist) {
 });
 
 
-// Get the modal
 var modal = document.getElementsByClassName("modal-overlay")[0];
 
-// Get the button that opens the modal
 var img = document.getElementsByClassName("playlistImg");
 
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
-// span.addEventListener("click", () => {
-//     modal.style.display = "none";
-// });
 
 for (let i = 0; i < img.length; i++) {
     
@@ -104,7 +160,7 @@ for (let i = 0; i < img.length; i++) {
             songLength.textContent = song.duration;
             songsCard.appendChild(songLength);
 
-            let container = document.querySelector(".modal-content");
+            let container = document.querySelector("#songContainer");
             container.appendChild(songsCard);
             
         });
@@ -123,15 +179,20 @@ for (let i = 0; i < img.length; i++) {
     
 }
 
-let shuffleBtn = document.getElementById("shuffleBtn")
-shuffleBtn.addEventListener("click", () => {
-    let songList = document.getElementsByClassName("song");
-    let songs = Array.from(songList.children);
-    songs.sort(() => Math.pow);
-    songs.forEach(function(song) {
-        songList.appendChild(song);
-    });
-});
+document.getElementById('shuffleBtn').addEventListener('click', shuffleSongs);
+
+function shuffleSongs() {
+    const container = document.getElementById('songContainer');
+    const songs = Array.from(container.getElementsByClassName('song'));
+
+    for (let i = songs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [songs[i], songs[j]] = [songs[j], songs[i]];
+    }
+
+    container.innerHTML = '';
+    songs.forEach(song => container.appendChild(song));
+}
 
 
 let likeButton = document.getElementsByClassName("emoji");
